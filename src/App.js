@@ -3,11 +3,13 @@ import React, { Component } from "react";
 import { nanoid } from "nanoid";
 import Experience from "./Experience";
 import Education from "./Education";
+import ExportPDF from "./ExportPDF";
+import exampleImg from "./example-img.jpg";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.init = {
       personalInfo: {
         fname: "",
         lname: "",
@@ -40,6 +42,50 @@ class App extends Component {
         },
       ],
     };
+    this.example = {
+      personalInfo: {
+        fname: "Andrea",
+        lname: "Lizarraga",
+        title: "Paralegal",
+        photo: { exampleImg },
+        address: "30 Hidden Drive",
+        phone: "(858)555-5555",
+        email: "andrealiz@email.com",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum accusamus nulla libero odit maxime a temporibus nemo. Expedita iste vero perspiciatis iusto. Eum, rerum necessitatibus.",
+      },
+      experience: [
+        {
+          id: nanoid(),
+          position: "Paralegal",
+          company: "Mittens Law Firm",
+          city: "San Francisco",
+          from: "2015",
+          to: "Present",
+        },
+        {
+          id: nanoid(),
+          position: "Law Clerk",
+          company: "Ritz Law",
+          city: "San Francisco",
+          from: "2012",
+          to: "2015",
+        },
+      ],
+      education: [
+        {
+          id: nanoid(),
+          university: "Harvard University",
+          city: "Cambridge, MA",
+          degree: "Bachelors of Science",
+          subject: "Political Science",
+          from: "2012",
+          to: "2016",
+        },
+      ],
+    };
+    this.state = this.init;
+
     this.addEducation = this.addEducation.bind(this);
     this.addExperience = this.addExperience.bind(this);
     this.deleteExperience = this.deleteExperience.bind(this);
@@ -47,6 +93,9 @@ class App extends Component {
     this.handleExperienceInput = this.handleExperienceInput.bind(this);
     this.handleEducationInput = this.handleEducationInput.bind(this);
     this.handlePersonalInfoInput = this.handlePersonalInfoInput.bind(this);
+    this.handleFileInput = this.handleFileInput.bind(this);
+    this.exampleForm = this.exampleForm.bind(this);
+    this.clearForm = this.clearForm.bind(this);
   }
 
   addEducation() {
@@ -124,13 +173,29 @@ class App extends Component {
       };
     });
   }
+  handleFileInput(e) {
+    this.setState((prev) => {
+      const objectURL = URL.createObjectURL(e.target.files[0]);
+      return {
+        personalInfo: {
+          ...prev.personalInfo,
+          [e.target.name]: objectURL,
+        },
+      };
+    });
+  }
   handleSubmit(e) {
     e.preventDefault();
   }
-
+  clearForm() {
+    this.setState(this.init);
+  }
+  exampleForm() {
+    this.setState(this.example);
+  }
   render() {
     const { experience, education } = this.state;
-    console.log(this.state.personalInfo);
+    console.log("rendered", this.state.personalInfo);
     return (
       <>
         <header>
@@ -151,6 +216,7 @@ class App extends Component {
               onChange={(e) => {
                 this.handlePersonalInfoInput(e);
               }}
+              value={this.state.personalInfo.fname}
             />
             <input
               type="text"
@@ -159,6 +225,7 @@ class App extends Component {
               onChange={(e) => {
                 this.handlePersonalInfoInput(e);
               }}
+              value={this.state.personalInfo.lname}
             />
             <input
               type="text"
@@ -167,6 +234,7 @@ class App extends Component {
               onChange={(e) => {
                 this.handlePersonalInfoInput(e);
               }}
+              value={this.state.personalInfo.title}
             />
             <label htmlFor="photo">Photo:</label>
             <input
@@ -174,6 +242,9 @@ class App extends Component {
               type="file"
               accept="image/png, image/gif, image/jpeg"
               placeholder="Photo"
+              onChange={(e) => {
+                this.handleFileInput(e);
+              }}
             />
             <input
               type="text"
@@ -182,6 +253,7 @@ class App extends Component {
               onChange={(e) => {
                 this.handlePersonalInfoInput(e);
               }}
+              value={this.state.personalInfo.address}
             />
             <input
               type="tel"
@@ -190,6 +262,7 @@ class App extends Component {
               onChange={(e) => {
                 this.handlePersonalInfoInput(e);
               }}
+              value={this.state.personalInfo.phone}
             />
             <input
               type="email"
@@ -198,6 +271,7 @@ class App extends Component {
               onChange={(e) => {
                 this.handlePersonalInfoInput(e);
               }}
+              value={this.state.personalInfo.email}
             />
             <input
               type="text"
@@ -206,6 +280,7 @@ class App extends Component {
               onChange={(e) => {
                 this.handlePersonalInfoInput(e);
               }}
+              value={this.state.personalInfo.description}
             />
           </fieldset>
           <Experience
@@ -245,6 +320,24 @@ class App extends Component {
             Delete Education
           </button>
         </form>
+        <ExportPDF data={this.state} />
+        <div className="actions">
+          <button
+            onClick={() => {
+              this.exampleForm();
+            }}
+          >
+            Show Example
+          </button>
+          <button
+            onClick={() => {
+              this.clearForm();
+            }}
+          >
+            Reset
+          </button>
+        </div>
+        <footer>Copyright &copy; 2022 Ozkar Alvarez GIT</footer>
       </>
     );
   }
