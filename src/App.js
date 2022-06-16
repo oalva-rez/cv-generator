@@ -17,7 +17,21 @@ class App extends Component {
       },
       experience: [
         {
-          position: "",
+          position: "a",
+          company: "",
+          city: "",
+          from: "",
+          to: "",
+        },
+        {
+          position: "b",
+          company: "",
+          city: "",
+          from: "",
+          to: "",
+        },
+        {
+          position: "c",
           company: "",
           city: "",
           from: "",
@@ -37,6 +51,8 @@ class App extends Component {
     };
     this.addEducation = this.addEducation.bind(this);
     this.addExperience = this.addExperience.bind(this);
+    this.deleteExperience = this.deleteExperience.bind(this);
+    this.deleteExperience = this.deleteExperience.bind(this);
   }
 
   addEducation() {
@@ -56,6 +72,21 @@ class App extends Component {
       };
     });
   }
+  handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  deleteExperience() {
+    this.setState({
+      experience: this.state.experience.slice(0, -1),
+    });
+  }
+  deleteEducation() {
+    this.setState({
+      education: this.state.education.slice(0, -1),
+    });
+  }
+
   addExperience() {
     this.setState((prev) => {
       return {
@@ -74,15 +105,43 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <button
-          onClick={() => {
-            this.addExperience();
+      <>
+        <header>
+          <h1>CV GENERATOR</h1>
+        </header>
+        <form
+          className="input--container"
+          onSubmit={(e) => {
+            this.handleSubmit(e);
           }}
         >
-          Add
-        </button>
-      </div>
+          <fieldset>
+            <legend>Personal Information</legend>
+            <input type="text" placeholder="First Name" />
+            <input type="text" placeholder="Last Name" />
+            <input type="text" placeholder="Title" />
+            <label htmlFor="photo">Photo:</label>
+            <input
+              name="photo"
+              type="file"
+              accept="image/png, image/gif, image/jpeg"
+              placeholder="Photo"
+            />
+            <input type="text" placeholder="Address" />
+            <input type="tel" placeholder="Phone Number" />
+            <input type="email" placeholder="Email" />
+            <input type="text" placeholder="Description" />
+          </fieldset>
+          {/* <Experience /> */}
+          <button
+            onClick={() => {
+              this.deleteExperience();
+            }}
+          >
+            Delete
+          </button>
+        </form>
+      </>
     );
   }
 }
