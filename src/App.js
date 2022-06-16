@@ -1,6 +1,8 @@
 import "./App.css";
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
+import Experience from "./Experience";
+import Education from "./Education";
 
 class App extends Component {
   constructor(props) {
@@ -17,21 +19,8 @@ class App extends Component {
       },
       experience: [
         {
-          position: "a",
-          company: "",
-          city: "",
-          from: "",
-          to: "",
-        },
-        {
-          position: "b",
-          company: "",
-          city: "",
-          from: "",
-          to: "",
-        },
-        {
-          position: "c",
+          id: nanoid(),
+          position: "",
           company: "",
           city: "",
           from: "",
@@ -40,6 +29,7 @@ class App extends Component {
       ],
       education: [
         {
+          id: nanoid(),
           university: "",
           city: "",
           degree: "",
@@ -53,6 +43,8 @@ class App extends Component {
     this.addExperience = this.addExperience.bind(this);
     this.deleteExperience = this.deleteExperience.bind(this);
     this.deleteExperience = this.deleteExperience.bind(this);
+    this.handleExperienceInput = this.handleExperienceInput.bind(this);
+    this.handleEducationInput = this.handleEducationInput.bind(this);
   }
 
   addEducation() {
@@ -61,10 +53,28 @@ class App extends Component {
         education: [
           ...prev.education,
           {
+            id: nanoid(),
             university: "",
             city: "",
             degree: "",
             subject: "",
+            from: "",
+            to: "",
+          },
+        ],
+      };
+    });
+  }
+  addExperience() {
+    this.setState((prev) => {
+      return {
+        experience: [
+          ...prev.experience,
+          {
+            id: nanoid(),
+            position: "",
+            company: "",
+            city: "",
             from: "",
             to: "",
           },
@@ -86,24 +96,29 @@ class App extends Component {
       education: this.state.education.slice(0, -1),
     });
   }
-
-  addExperience() {
+  handleExperienceInput(e, id) {
     this.setState((prev) => {
-      return {
-        experience: [
-          ...prev.experience,
-          {
-            position: "",
-            company: "",
-            city: "",
-            from: "",
-            to: "",
-          },
-        ],
-      };
+      let newArr = prev.experience.map((exp) => {
+        return exp.id === id
+          ? { ...exp, [e.target.name]: e.target.value }
+          : { ...exp };
+      });
+      return { experience: newArr };
     });
   }
+  handleEducationInput(e, id) {
+    this.setState((prev) => {
+      let newArr = prev.education.map((edu) => {
+        return edu.id === id
+          ? { ...edu, [e.target.name]: e.target.value }
+          : { ...edu };
+      });
+      return { education: newArr };
+    });
+  }
+
   render() {
+    const { experience, education } = this.state;
     return (
       <>
         <header>
@@ -132,13 +147,41 @@ class App extends Component {
             <input type="email" placeholder="Email" />
             <input type="text" placeholder="Description" />
           </fieldset>
-          {/* <Experience /> */}
+          <Experience
+            experience={experience}
+            handleExperienceInput={this.handleExperienceInput}
+          />
+          <button
+            onClick={() => {
+              this.addExperience();
+            }}
+          >
+            Add Experience
+          </button>
           <button
             onClick={() => {
               this.deleteExperience();
             }}
           >
-            Delete
+            Delete Experience
+          </button>
+          <Education
+            education={education}
+            handleEducationInput={this.handleEducationInput}
+          />
+          <button
+            onClick={() => {
+              this.addEducation();
+            }}
+          >
+            Add Education
+          </button>
+          <button
+            onClick={() => {
+              this.deleteEducation();
+            }}
+          >
+            Delete Education
           </button>
         </form>
       </>
