@@ -28,7 +28,6 @@ export default class ExportPDF extends Component {
     console.log(photo);
     return (
       <div className="resume-export">
-        <div className="mb5"></div>
         <div
           id="cv-letter"
           className="mt4"
@@ -103,6 +102,7 @@ export default class ExportPDF extends Component {
           onClick={() => {
             this.printDocument();
           }}
+          className="download-btn"
         >
           Download PDF
         </button>

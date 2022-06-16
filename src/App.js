@@ -283,42 +283,46 @@ class App extends Component {
               value={this.state.personalInfo.description}
             />
           </fieldset>
-          <Experience
-            experience={experience}
-            handleExperienceInput={this.handleExperienceInput}
-          />
-          <button
-            onClick={() => {
-              this.addExperience();
-            }}
-          >
-            Add Experience
-          </button>
-          <button
-            onClick={() => {
-              this.deleteExperience();
-            }}
-          >
-            Delete Experience
-          </button>
-          <Education
-            education={education}
-            handleEducationInput={this.handleEducationInput}
-          />
-          <button
-            onClick={() => {
-              this.addEducation();
-            }}
-          >
-            Add Education
-          </button>
-          <button
-            onClick={() => {
-              this.deleteEducation();
-            }}
-          >
-            Delete Education
-          </button>
+          <div className="exp--container">
+            <Experience
+              experience={experience}
+              handleExperienceInput={this.handleExperienceInput}
+            />
+            <button
+              onClick={() => {
+                this.addExperience();
+              }}
+            >
+              Add Experience
+            </button>
+            <button
+              onClick={() => {
+                this.deleteExperience();
+              }}
+            >
+              Delete Experience
+            </button>
+          </div>
+          <div className="edu--container">
+            <Education
+              education={education}
+              handleEducationInput={this.handleEducationInput}
+            />
+            <button
+              onClick={() => {
+                this.addEducation();
+              }}
+            >
+              Add Education
+            </button>
+            <button
+              onClick={() => {
+                this.deleteEducation();
+              }}
+            >
+              Delete Education
+            </button>
+          </div>
         </form>
         <ExportPDF data={this.state} />
         <div className="actions">
