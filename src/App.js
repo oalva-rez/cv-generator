@@ -11,6 +11,7 @@ class App extends Component {
       personalInfo: {
         fname: "",
         lname: "",
+        title: "",
         photo: "",
         address: "",
         phone: "",
@@ -45,6 +46,7 @@ class App extends Component {
     this.deleteExperience = this.deleteExperience.bind(this);
     this.handleExperienceInput = this.handleExperienceInput.bind(this);
     this.handleEducationInput = this.handleEducationInput.bind(this);
+    this.handlePersonalInfoInput = this.handlePersonalInfoInput.bind(this);
   }
 
   addEducation() {
@@ -82,10 +84,6 @@ class App extends Component {
       };
     });
   }
-  handleSubmit(e) {
-    e.preventDefault();
-  }
-
   deleteExperience() {
     this.setState({
       experience: this.state.experience.slice(0, -1),
@@ -98,7 +96,7 @@ class App extends Component {
   }
   handleExperienceInput(e, id) {
     this.setState((prev) => {
-      let newArr = prev.experience.map((exp) => {
+      const newArr = prev.experience.map((exp) => {
         return exp.id === id
           ? { ...exp, [e.target.name]: e.target.value }
           : { ...exp };
@@ -108,7 +106,7 @@ class App extends Component {
   }
   handleEducationInput(e, id) {
     this.setState((prev) => {
-      let newArr = prev.education.map((edu) => {
+      const newArr = prev.education.map((edu) => {
         return edu.id === id
           ? { ...edu, [e.target.name]: e.target.value }
           : { ...edu };
@@ -116,9 +114,23 @@ class App extends Component {
       return { education: newArr };
     });
   }
+  handlePersonalInfoInput(e) {
+    this.setState((prev) => {
+      return {
+        personalInfo: {
+          ...prev.personalInfo,
+          [e.target.name]: e.target.value,
+        },
+      };
+    });
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+  }
 
   render() {
     const { experience, education } = this.state;
+    console.log(this.state.personalInfo);
     return (
       <>
         <header>
@@ -132,9 +144,30 @@ class App extends Component {
         >
           <fieldset>
             <legend>Personal Information</legend>
-            <input type="text" placeholder="First Name" />
-            <input type="text" placeholder="Last Name" />
-            <input type="text" placeholder="Title" />
+            <input
+              type="text"
+              placeholder="First Name"
+              name="fname"
+              onChange={(e) => {
+                this.handlePersonalInfoInput(e);
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              name="lname"
+              onChange={(e) => {
+                this.handlePersonalInfoInput(e);
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Title"
+              name="title"
+              onChange={(e) => {
+                this.handlePersonalInfoInput(e);
+              }}
+            />
             <label htmlFor="photo">Photo:</label>
             <input
               name="photo"
@@ -142,10 +175,38 @@ class App extends Component {
               accept="image/png, image/gif, image/jpeg"
               placeholder="Photo"
             />
-            <input type="text" placeholder="Address" />
-            <input type="tel" placeholder="Phone Number" />
-            <input type="email" placeholder="Email" />
-            <input type="text" placeholder="Description" />
+            <input
+              type="text"
+              placeholder="Address"
+              name="address"
+              onChange={(e) => {
+                this.handlePersonalInfoInput(e);
+              }}
+            />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              name="phone"
+              onChange={(e) => {
+                this.handlePersonalInfoInput(e);
+              }}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={(e) => {
+                this.handlePersonalInfoInput(e);
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Description"
+              name="description"
+              onChange={(e) => {
+                this.handlePersonalInfoInput(e);
+              }}
+            />
           </fieldset>
           <Experience
             experience={experience}
