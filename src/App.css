@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Montserrat:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Press+Start+2P&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 56, 244, 0.71) 0%,
+    rgba(224, 37, 206, 0.79) 93.75%
+  );
+  background-attachment: fixed;
+}
+
+#root {
+  height: 100vh;
+  display: grid;
+  grid-template: 75px 1fr 70px 45px / 1fr 1fr;
+}
+
+.app--header {
+  grid-area: 1 / 1 / 2 / 3;
+  color: white;
+  display: grid;
+  align-items: center;
+  padding-left: 8%;
+  font-family: "Press Start 2P", cursive;
+}
+
+.input--container {
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  padding-bottom: 10px;
+}
+.input--container > * {
+  width: 450px;
+}
+.input--container > *:not(:last-child) {
+  margin-bottom: 20px;
+}
+fieldset {
+  border: 0;
+  display: flex;
+  flex-direction: column;
+}
+legend,
+label {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: white;
+}
+legend {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.233);
+  margin-bottom: 5px;
+}
+.input--container input {
+  background: rgba(196, 196, 196, 0.35);
+  border-radius: 5px;
+  color: white;
+  border: 0;
+  outline: none;
+  margin: 3px;
+  padding: 4px 4px 4px 8px;
+}
+#photo {
+  display: none;
+}
+.photo-label {
+  flex: 1;
+  text-align: center;
+  background-color: #333333;
+  font-size: 1rem;
+  padding: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: normal;
+  margin: 3px 3px;
+}
+::placeholder {
+  color: white;
+  font-weight: 300;
+  font-size: 0.8rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.edu--container,
+.exp--container {
+  display: flex;
+  flex-direction: column;
+}
+
+.edu--container button,
+.exp--container button {
+  background-color: #333333;
+  font-size: 1rem;
+  padding: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: normal;
+  margin: 3px 3px;
+  color: white;
+  font-weight: normal;
+  border: none;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+.actions {
+  grid-area: -3 / 1 / -2 / 2;
+  display: grid;
+  align-content: start;
+  margin: 0 auto;
+  width: 450px;
+}
+.actions button {
+  font-size: 1rem;
+  padding: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: normal;
+  margin: 3px 3px;
+  color: white;
+  font-weight: normal;
+  border: none;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+}
+.actions button:nth-child(1) {
+  background-color: #ff741d;
+}
+.actions button:nth-child(2) {
+  background-color: #ff231b;
+}
+
+footer {
+  grid-area: -2 / 1 / -1 / -1;
+  font-size: 0.8rem;
+  display: grid;
+  place-content: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.143);
+  margin-top: 20px;
+}

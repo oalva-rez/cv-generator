@@ -32,14 +32,13 @@ export default class ExportPDF extends Component {
           id="cv-letter"
           className="mt4"
           style={{
-            backgroundColor: "#f5f5f5",
-            width: "210mm",
-            minHeight: "297mm",
+            width: "160mm",
+            minHeight: "226mm",
             marginLeft: "auto",
             marginRight: "auto",
           }}
         >
-          <header>
+          <header className="resume--header">
             <h1>
               {personalInfo.fname} {personalInfo.lname}
             </h1>
@@ -54,14 +53,16 @@ export default class ExportPDF extends Component {
               <h3>Experience</h3>
               {experience.map((exp) => {
                 return (
-                  <div className="job" key={exp.id}>
+                  <div className="main--info" key={exp.id}>
                     <h4>
                       {exp.from} - {exp.to}
                     </h4>
-                    <h4>{exp.position}</h4>
-                    <p>
-                      {exp.company} {exp.city}
-                    </p>
+                    <div className="main--name-city">
+                      <h4>{exp.position}</h4>
+                      <p>
+                        {exp.company}, {exp.city}
+                      </p>
+                    </div>
                   </div>
                 );
               })}
@@ -70,15 +71,17 @@ export default class ExportPDF extends Component {
               <h3>Education</h3>
               {education.map((edu) => {
                 return (
-                  <div className="edu" key={edu.id}>
+                  <div className="main--info" key={edu.id}>
                     <h4>
                       {edu.from} - {edu.to}
                     </h4>
-                    <h4>
-                      {edu.university} {edu.city}
-                    </h4>
-                    <p>Degree: {edu.degree}</p>
-                    <p>Subject: {edu.subject}</p>
+                    <div className="main--name-city">
+                      <h4>
+                        {edu.university} {edu.city}
+                      </h4>
+                      <p>Degree: {edu.degree}</p>
+                      <p>Subject: {edu.subject}</p>
+                    </div>
                   </div>
                 );
               })}
@@ -89,13 +92,15 @@ export default class ExportPDF extends Component {
             {photo === "empty" && <img src={emptyAvatar} alt="empty avatar" />}
             {photo === "filled" && <img src={personalInfo.photo} alt="user" />}
 
-            <h3>Personal Details</h3>
-            <h4>Address</h4>
-            <p>{personalInfo.address}</p>
-            <h4>Phone Number</h4>
-            <p>{personalInfo.phone}</p>
-            <h4>Email</h4>
-            <p>{personalInfo.email}</p>
+            <div className="details">
+              <h3>Personal Details</h3>
+              <h4>Address</h4>
+              <p>{personalInfo.address}</p>
+              <h4>Phone Number</h4>
+              <p>{personalInfo.phone}</p>
+              <h4>Email</h4>
+              <p>{personalInfo.email}</p>
+            </div>
           </aside>
         </div>
         <button

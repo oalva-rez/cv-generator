@@ -1,4 +1,5 @@
 import "./App.css";
+import "./Resume.css";
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
 import Experience from "./Experience";
@@ -52,7 +53,7 @@ class App extends Component {
         phone: "(858)555-5555",
         email: "andrealiz@email.com",
         description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum accusamus nulla libero odit maxime a temporibus nemo. Expedita iste vero perspiciatis iusto. Eum, rerum necessitatibus.",
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum accusamus nulla libero odit maxime a temporibus nemo. Expedita iste vero perspiciatis iusto. Eum, rerum necessitatibus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum accusamus nulla libero odit maxime a temporibus nemo. Expedita iste vero perspiciatis iusto. Eum, rerum necessitatibus.",
       },
       experience: [
         {
@@ -70,6 +71,22 @@ class App extends Component {
           city: "San Francisco",
           from: "2012",
           to: "2015",
+        },
+        {
+          id: nanoid(),
+          position: "Secretary",
+          company: "Shelby Finance Group",
+          city: "San Diego",
+          from: "2009",
+          to: "2012",
+        },
+        {
+          id: nanoid(),
+          position: "Student Resource Manager",
+          company: "Manchester High School",
+          city: "San Diego",
+          from: "2009",
+          to: "2012",
         },
       ],
       education: [
@@ -198,7 +215,7 @@ class App extends Component {
     console.log("rendered", this.state.personalInfo);
     return (
       <>
-        <header>
+        <header className="app--header">
           <h1>CV GENERATOR</h1>
         </header>
         <form
@@ -236,16 +253,7 @@ class App extends Component {
               }}
               value={this.state.personalInfo.title}
             />
-            <label htmlFor="photo">Photo:</label>
-            <input
-              name="photo"
-              type="file"
-              accept="image/png, image/gif, image/jpeg"
-              placeholder="Photo"
-              onChange={(e) => {
-                this.handleFileInput(e);
-              }}
-            />
+
             <input
               type="text"
               placeholder="Address"
@@ -281,6 +289,19 @@ class App extends Component {
                 this.handlePersonalInfoInput(e);
               }}
               value={this.state.personalInfo.description}
+            />
+            <label htmlFor="photo" className="photo-label">
+              Upload Photo
+            </label>
+            <input
+              name="photo"
+              id="photo"
+              type="file"
+              accept="image/png, image/gif, image/jpeg"
+              placeholder="Photo"
+              onChange={(e) => {
+                this.handleFileInput(e);
+              }}
             />
           </fieldset>
           <div className="exp--container">
