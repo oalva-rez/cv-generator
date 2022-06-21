@@ -67,6 +67,17 @@ legend {
   margin: 3px;
   padding: 4px 4px 4px 8px;
 }
+textarea {
+  background: rgba(196, 196, 196, 0.35);
+  border-radius: 5px;
+  color: white;
+  border: 0;
+  outline: none;
+  margin: 3px;
+  padding: 4px 4px 4px 8px;
+  overflow: hidden;
+  resize: none;
+}
 #photo {
   display: none;
 }
